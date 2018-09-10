@@ -7,6 +7,7 @@ def async_task():
   t.start()
 
 def run():
+  print("Calc", 'started')
   parties = model.get_party_records()
   individuals = model.get_individual_records()
   res = calc.calc_independent_candidates(individuals)
@@ -14,3 +15,4 @@ def run():
     parties = parties,
     individuals = res
   ))
+  print("Calc", 'finished')

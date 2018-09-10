@@ -7,4 +7,4 @@ def exists_ip(ip_addr_checksum):
 
 def save_record(ip_addr_checksum: str, data: dict):
   model.create_record(ip_addr_checksum, data)
-  async_calc.run()
+  async_calc.async_task()
