@@ -10,6 +10,7 @@ from schema import (
 import facade
 import model
 from hashlib import sha256
+import os
 
 app = Flask(__name__)
 
@@ -28,11 +29,11 @@ def submit():
   req = request.get_json()
   submit_schema.validate(req)
   ip = sha256(request.remote_addr.encode('ascii')).hexdigest()
-  # if facade.exists_ip(ip):
-  #   return jsonify({
-  #     'success': False,
-  #     'message': '该IP已投过票了'
-  #   })
+  if facade.exists_ip(ip) and os.environ.get('env') == 'prod':
+    return jsonify({
+      'success': False,
+      'message': '该IP已投过票了'
+    })
   facade.save_record(ip, req)
   return jsonify({
     'success': True,
