@@ -15,6 +15,6 @@ def calc_independent_candidates(vote_results):
     order.append(last)
     candidates.remove(last)
     for r in vote_results:
-      if r and (r[-1] == last or r[-1] not in candidates):
+      while r and (r[-1] == last or r[-1] not in candidates):
         r.pop()
   return list(reversed(order))
